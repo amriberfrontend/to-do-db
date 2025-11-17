@@ -72,15 +72,31 @@ function showTasks() {
             listItem.appendChild(h3);
             listItem.appendChild(pg);
             taskList.appendChild(listItem);
-            h3.textContent = task.value.title;
-            pg.textContent = task.value.body;
-            listItem.setAttribute('data-id', task.value.id);
+            h3.textContent = task.title;
+            pg.textContent = task.body;
+            listItem.setAttribute('data-id', task.id);
             const deleteBtn = document.createElement('button');
             listItem.appendChild(deleteBtn);
             deleteBtn.textContent = 'Remove';
+            deleteBtn.addEventListener("click", function() {removeTask(listItem)});
         }    
     } 
 }
 
+
 // Update
 // Delete
+function removeTask(e: HTMLLIElement) {
+    const taskID = parseInt(e.getAttribute("data-id")!!);
+    const transaction = db.transaction(['todo_table'], 'readwrite');
+    const objectStore = transaction.objectStore('todo_table');
+    objectStore.delete(taskID);
+    transaction.oncomplete = () => {
+        e.parentNode?.removeChild(e);
+        if (!taskList.firstChild) {
+            const noTaskItem = <HTMLLIElement> document.createElement("li");
+            noTaskItem.textContent = "No tasks ongoing";
+            taskList.append(noTaskItem);
+        }
+    }
+}
