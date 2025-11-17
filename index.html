@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IndexedDB</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link href="styles/styles.css" rel="stylesheet"> -->
+        <script src="dist/index.js" defer></script>
+    </head>
+    <body>
+        <main>
+            <h1>TODO APP</h1>
+            <aside class="card card-elevated view" id="view">
+                <h2>Ongoing tasks</h2>
+                <div>
+                    <ol id="view__list"></ol>
+                </div>
+            </aside>
+            <aside class="card card-elevated add" id="add">
+                <h2>Add tasks</h2>
+                <form>
+                    <div>
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" required>
+                        
+                    </div>
+                    <div>
+                        <label for="description">Description:</label>
+                        <input type="text" id="description" required>
+
+                    </div>
+                    
+                </form>
+                <div>
+                    <button id="save">Save</button>
+                </div>
+            </aside>
+        </main>
+    </body>
+</html>
